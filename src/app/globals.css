@@ -1,27 +1,391 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+	/* Reset CSS */
+	html,
+	body,
+	* {
+		@apply p-0 m-0 font-sans box-border;
+	}
+	/* Scrollbar Styles */
+	::-webkit-scrollbar {
+		@apply w-0;
+	}
+	/* Links Styles */
+	a {
+		@apply text-inherit no-underline;
+	}
+	/* Main Container Styles */
+	.main-container {
+		@apply max-w-[1400px] m-auto w-full;
+	}
+	/* Layout Styles */
+	.layout {
+		@apply p-10;
+	}
+	/* Navbar Styles */
+	.navbar-container {
+		@apply flex justify-between my-1 mx-4 relative;
+	}
+	/* Marquee Text Styles */
+	.marquee-text {
+		@apply text-2xl font-semibold mt-12 text-red-500;
+	}
+	/* Marquee Styles */
+	.marquee {
+		@apply relative h-[400px] w-full overflow-x-hidden;
+	}
+	.track {
+		@apply absolute whitespace-nowrap will-change-transform animate-[marqueew];
+	}
+	/* .track:hover {
+		@apply pau;
+	} */
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+	@keyframes scrollRightToLeft {
+		from {
+			transform: translateX(100%);
+		}
+		to {
+			transform: translateX(-100%);
+		}
+	}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+	/* Apply animation to the container */
+	.animate-scroll-right-to-left {
+		animation: marquee 5s linear infinite; /* Adjust animation duration as needed */
+		animation-play-state: running; /* Initial state is running */
+	}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	/* Pause animation on hover */
+	.animate-scroll-right-to-left:hover {
+		animation-play-state: paused; /* Pause animation on hover */
+	}
+
+	@keyframes marquee {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	/* Red Text Styles */
+	.text-red {
+		@apply -webkit-text-stroke-1 text-red-500 ml-6;
+	}
+	/* Logo Styles */
+	.logo {
+		@apply text-gray-500 text-base;
+	}
+	/* Cart Icon Styles */
+	.cart-icon {
+		@apply text-gray-500 text-2xl transform transition-transform hover:scale-110 relative;
+	}
+
+	.cart-item-qty {
+		@apply absolute right-[-6px] top-0 text-xs text-white bg-red-500 w-4 h-4 rounded-full text-center font-semibold;
+	}
+	/* Products Container Styles */
+	.products-container {
+		@apply flex flex-wrap justify-center gap-4 mt-20 w-full;
+	}
+	/* Product Card Styles */
+	.product-card {
+		@apply cursor-pointer transform transition-transform  transition  text-blue-700;
+	}
+	.product-card:hover {
+		@apply scale-105;
+	}
+	/* Product Image Styles */
+	.product-image {
+		@apply rounded-lg bg-gray-300 transform scale-100 transition-transform;
+	}
+	/* Product Name Styles */
+	.product-name {
+		@apply font-semibold;
+	}
+	/* Product Price Styles */
+	.product-price {
+		@apply font-semibold mt-2 text-black;
+	}
+	/* Hero Banner Container Styles */
+	.hero-banner-container {
+		@apply p-20 bg-gray-300 rounded-lg relative h-96 w-full;
+	}
+	/* Beats Solo Styles */
+	/* .beats-solo {
+		@apply text-lg;
+	} */
+	/* Hero Banner Button Styles */
+	.hero-banner-container button {
+		@apply rounded-lg p-4 bg-red-500 text-white mt-8 font-semibold cursor-pointer;
+		@apply z-10;
+	}
+	/* Hero Banner Heading Styles */
+	.hero-banner-container h3 {
+		@apply text-4xl mt-4;
+	}
+	/* Hero Banner H1 Styles */
+	.hero-banner-container h1 {
+		@apply text-8xl text-white ml-[-20px] uppercase;
+	}
+	/* Hero Banner Image Styles */
+	.hero-banner-image {
+		@apply absolute top-0 right-[20%] w-72 h-72;
+	}
+	/* Description Styles */
+	.desc {
+		@apply absolute right-10 bottom-5 w-72 leading-5 flex flex-col text-blue-700;
+	}
+	.desc p {
+		@apply text-gray-600 font-light text-right;
+	}
+	.desc h5 {
+		@apply mb-4 font-semibold text-xl self-end;
+	}
+	/* Products Heading Styles */
+	.products-heading {
+		@apply text-center mt-20;
+	}
+	.products-heading h2 {
+		@apply text-4xl font-semibold;
+	}
+	.products-heading p {
+		@apply text-xl font-light;
+	}
+	/* Footer Banner Container Styles */
+	.footer-banner-container {
+		@apply p-20 mt-32 bg-red-500 rounded-lg relative h-[400px] w-full text-white;
+	}
+	/* Banner Description Styles */
+	.banner-desc {
+		@apply flex justify-between;
+	}
+	.banner-desc button {
+		@apply rounded-lg p-4 bg-white text-red-500 mt-8 font-semibold cursor-pointer;
+	}
+	.banner-desc .left h3 {
+		@apply font-semibold text-6xl ml-4;
+	}
+	.banner-desc .left p {
+		@apply mt-4 ml-4;
+	}
+	.banner-desc .right h3 {
+		@apply text-4xl;
+	}
+	.banner-desc .right p {
+		@apply text-xl;
+	}
+
+	.footer-banner-image {
+		@apply absolute w-[40%] md:w-[35%] lg:w-[30%]  left-[25%] -top-[25%];
+	}
+
+	.banner-desc .right .company-desc {
+		@apply text-base font-light;
+	}
+	/* Cart Wrapper Styles */
+	.cart-wrapper {
+		@apply fixed top-0 right-0 z-50 w-full h-full bg-opacity-50 bg-black transition-all duration-1000 ease-in-out;
+	}
+	/* Cart Container Styles */
+	.cart-container {
+		@apply h-screen w-96 bg-white float-right p-10 relative;
+	}
+	/* Footer Container Styles */
+	.footer-container {
+		@apply text-blue-700 text-center mt-20 p-10 font-semibold flex flex-col items-center gap-4 justify-center;
+	}
+	/* Footer Icons Styles */
+	.footer-container .icons {
+		@apply text-2xl flex gap-4;
+	}
+	/* Cart Heading Styles */
+	.cart-heading {
+		@apply flex items-center text-xl font-semibold cursor-pointer gap-1 ml-4;
+	}
+	/* Cart Num Items Styles */
+	.cart-num-items {
+		@apply ml-4 text-red-500;
+	}
+	/* Empty Cart Styles */
+	.empty-cart {
+		@apply text-center mt-20;
+	}
+	.empty-cart h3 {
+		@apply font-semibold text-xl;
+	}
+	/* Cancel Styles */
+	.cancel {
+		@apply cursor-pointer text-red-500;
+	}
+	/* Product Container Styles */
+	.product-container {
+		@apply mt-10 overflow-auto max-h-[70vh] px-10;
+	}
+	/* Product Styles */
+	.product {
+		@apply flex gap-4 p-5;
+	}
+	.product .cart-product-image {
+		@apply w-48 h-40 rounded-lg bg-gray-300;
+	}
+	/* Item Description Styles */
+	.item-desc {
+		@apply justify-between w-64 text-blue-700 flex;
+	}
+	.item-desc .bottom {
+		@apply mt-16;
+	}
+	.flex h5 {
+		@apply text-xl;
+	}
+	.flex h4 {
+		@apply text-lg;
+	}
+	/* Total Styles */
+	.total {
+		@apply flex justify-between;
+	}
+	.total h3 {
+		@apply text-xl;
+	}
+	/* Remove Item Styles */
+	.remove-item {
+		@apply text-red-500 text-3xl cursor-pointer;
+	}
+	/* Cart Bottom Styles */
+	.cart-bottom {
+		@apply absolute bottom-12 right-5 w-full px-20;
+	}
+	/* Button Container Styles */
+	.btn-container {
+		@apply w-96 mx-auto;
+	}
+	/* Button Styles */
+	.btn {
+		@apply w-full max-w-[400px] p-3 rounded-lg font-semibold text-2xl mt-10 uppercase bg-red-500 text-white cursor-pointer transition-transform duration-500 ease-in-out transform hover:scale-110;
+	}
+	/* Product Detail Container Styles */
+	.product-detail-container {
+		@apply flex gap-10 mt-10;
+	}
+	/* Product Detail Image Styles */
+	.product-detail-image {
+		@apply w-96 h-96 rounded-lg bg-gray-300 cursor-pointer transition duration-300 ease-in-out transform hover:bg-red-500;
+	}
+	/* Small Images Container Styles */
+	.small-images-container {
+		@apply flex gap-2 mt-4;
+	}
+	/* Small Image Styles */
+	.small-image {
+		@apply w-16 h-16 rounded-md bg-gray-300 cursor-pointer;
+	}
+	.selected-image {
+		@apply bg-red-500;
+	}
+	/* Reviews Styles */
+	.reviews {
+		@apply text-red-500 mt-4 flex gap-2 items-center;
+	}
+	/* Product Detail Description Styles */
+	.product-detail-desc h4 {
+		@apply mt-4 text-xl;
+	}
+	.product-detail-desc h1 {
+		@apply mt-4 text-4xl font-bold;
+	}
+	.product-detail-desc p {
+		@apply mt-4;
+	}
+	/* Reviews Paragraph Styles */
+	.reviews p {
+		@apply text-blue-700 mt-0;
+	}
+	/* Price Styles */
+	.product-detail-desc .price {
+		@apply font-semibold text-3xl mt-8 text-red-500;
+	}
+	/* Old Price Styles */
+	.price .old-price,
+	.product-price .old-price,
+	.price .old-price {
+		@apply text-gray-500 line-through;
+	}
+	/* Quantity Styles */
+	.product-detail-desc .quantity {
+		@apply flex   gap-4 mt-4 items-center;
+	}
+	.quantity h2 {
+		@apply font-bold text-xl;
+	}
+	/* Buttons Styles */
+	.product-detail-desc .buttons {
+		@apply flex gap-10;
+	}
+	.buttons .add-to-cart {
+		@apply p-3 border border-red-500 mt-8 font-semibold text-red-500 bg-white cursor-pointer w-52 transition-transform duration-500 ease-in-out transform hover:scale-110;
+	}
+	.buttons .buy-now {
+		@apply w-52 p-3 bg-red-500 text-white border-none mt-8 font-semibold cursor-pointer transition-transform duration-500 ease-in-out transform hover:scale-110;
+	}
+	/* Quantity Description Styles */
+	.quantity-desc {
+		@apply items-center flex border border-gray-300 p-2;
+	}
+	.quantity-desc span {
+		@apply text-lg p-2 cursor-pointer w-full;
+	}
+	.quantity-desc .minus {
+		@apply border-r flex justify-center px-4  border-gray-300 text-red-500;
+	}
+	.quantity-desc .num {
+		@apply border-r flex justify-center px-4 border-gray-300 text-xl;
+	}
+	.quantity-desc .plus {
+		@apply text-green-500 flex px-4 justify-center;
+	}
+	/* May Like Products Wrapper Styles */
+	.maylike-products-wrapper {
+		@apply mt-20;
+	}
+	/* May Like Products Heading Styles */
+	.maylike-products-wrapper h2 {
+		@apply text-center mt-20 text-4xl font-semibold;
+	}
+	/* May Like Products Container Styles */
+	.maylike-products-container {
+		@apply flex justify-center gap-4 mt-10;
+	}
+	/* Success and Cancel Wrapper Styles */
+	.success-wrapper,
+	.cancel-wrapper {
+		@apply bg-white min-h-[60vh];
+	}
+	/* Success Styles */
+	.success,
+	.cancel {
+		@apply w-96 mx-auto mt-20 p-5 rounded-lg bg-gray-300 flex flex-col items-center gap-4 justify-center;
+	}
+	.success .icon {
+		@apply text-green-500 text-3xl;
+	}
+	.success h2 {
+		@apply text-2xl font-semibold capitalize;
+	}
+	.success .email-msg {
+		@apply text-lg font-semibold text-center;
+	}
+	/* Cancel Styles */
+	.cancel p {
+		@apply text-xl font-semibold;
+	}
+	/* Product Max Quantity Styles */
+	.product-max-qty {
+		@apply mt-4 font-semibold text-red-500;
+	}
 }
