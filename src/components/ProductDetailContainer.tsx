@@ -1,7 +1,8 @@
 "use client";
+import { StateContext } from "@/context/StateContext";
 import { Product } from "@/types/Product";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
 	AiFillStar,
 	AiOutlineMinus,
@@ -13,6 +14,8 @@ type ProductDetailContainerProps = {
 };
 const ProductDetailContainer = ({ product }: ProductDetailContainerProps) => {
 	const [index, setIndex] = useState<number>(0);
+
+	const { incQty, decQty, qty, onAdd, cartItems } = useContext(StateContext);
 	return (
 		<div className="product-detail-container">
 			<div>
@@ -26,7 +29,7 @@ const ProductDetailContainer = ({ product }: ProductDetailContainerProps) => {
 					></Image>
 				</div>
 				<div className="small-images-container">
-					{product.image.map((image, i) => (
+					{product.image.map((image: string, i: number) => (
 						<Image
 							key={i}
 							src={image}
@@ -61,17 +64,23 @@ const ProductDetailContainer = ({ product }: ProductDetailContainerProps) => {
 				<div className="quantity">
 					<h2>Quantity:</h2>
 					<p className="quantity-desc">
-						<span className="minus">
+						<span className="minus" onClick={decQty}>
 							<AiOutlineMinus />
 						</span>
-						<span className="num">0</span>
-						<span className="plus">
+						<span className="num">{qty}</span>
+						<span className="plus" onClick={incQty}>
 							<AiOutlinePlus />
 						</span>
 					</p>
 				</div>
 				<div className="buttons">
-					<button type="button" className="add-to-cart">
+					<button
+						type="button"
+						className="add-to-cart"
+						onClick={() => {
+							onAdd(product, qty);
+						}}
+					>
 						Add to cart
 					</button>
 					<button type="button" className="buy-now">

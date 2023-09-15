@@ -13,7 +13,6 @@ const ProductDetails = async ({ params }: ProductDetailsProps) => {
 	const slug = params.slug;
 	const product = await getProduct(slug);
 	const products = await getProducts();
-
 	return (
 		<div>
 			<ProductDetailContainer product={product} />
