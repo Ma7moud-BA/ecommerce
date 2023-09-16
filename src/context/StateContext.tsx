@@ -41,12 +41,18 @@ const StateProvider = ({ children }: { children: ReactNode }) => {
 			const data: ProductWithQuantity[] = JSON.parse(cartItemsInStorage);
 
 			// Calculate the total quantity of items in the cart
-			const totalCartItemsQuantities: number = data.reduce((current, item) => {
-				return current + item.quantity;
-			}, 0);
-			const totalCartItemsPrices: number = data.reduce((current, item) => {
-				return current + item.price * item.quantity;
-			}, 0);
+			const totalCartItemsQuantities: number = data.reduce(
+				(current, item: ProductWithQuantity) => {
+					return current + item.quantity;
+				},
+				0
+			);
+			const totalCartItemsPrices: number = data.reduce(
+				(current, item: ProductWithQuantity) => {
+					return current + item.price * item.quantity;
+				},
+				0
+			);
 
 			setTotalQuantities(totalCartItemsQuantities);
 			setTotalPrice(totalCartItemsPrices);
@@ -75,13 +81,16 @@ const StateProvider = ({ children }: { children: ReactNode }) => {
 		setTotalPrice((prev) => prev + product.price * quantity);
 		setTotalQuantities((prev) => prev + quantity);
 		if (checkProductInCart) {
-			const updatedCartItems = cartItems.map((cartProduct) => {
-				if (cartProduct._id === product._id)
-					return {
-						...cartProduct,
-						quantity: cartProduct.quantity + quantity,
-					};
-			});
+			const updatedCartItems: ProductWithQuantity[] = cartItems.map(
+				(cartProduct: ProductWithQuantity) => {
+					if (cartProduct._id === product._id)
+						return {
+							...cartProduct,
+							quantity: cartProduct.quantity + quantity,
+						};
+					return cartProduct;
+				}
+			);
 			setCartItems(updatedCartItems);
 			addItemToLocalStorage(updatedCartItems);
 		} else {
@@ -91,6 +100,7 @@ const StateProvider = ({ children }: { children: ReactNode }) => {
 		}
 		toast.success(`${qty} ${product.name} added to the cart.`);
 	};
+
 	const toggleCartItemQuantity = (
 		id: string,
 		action: "increment" | "decrement"

@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
 	try {
 		// Create Checkout Sessions from body params.
-		const params = {
+		const params: Stripe.Checkout.SessionCreateParams = {
 			submit_type: "pay",
 			mode: "payment",
 			payment_method_types: ["card"],
