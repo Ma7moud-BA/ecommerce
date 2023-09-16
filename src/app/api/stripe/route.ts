@@ -4,7 +4,7 @@ import { ProductWithQuantity } from "@/context/StateContext";
 
 export async function POST(req: NextRequest) {
 	const body = await req.json();
-
+	console.log(process.env.NEXT_STRIPE_SECRET_KEY);
 	const stripe = new Stripe(process.env.NEXT_STRIPE_SECRET_KEY!, {
 		apiVersion: "2023-08-16",
 	});
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
 			cancel_url: `${process.env.PRODUCTION_DOMAIN}`,
 		};
 		const session = await stripe.checkout.sessions.create(params);
-		return NextResponse.json(session); // Return an object with the URL
+		return NextResponse.json(session);
 	} catch (err: any) {
 		return NextResponse.json({ error: err.message }); // Return an error object
 	}
