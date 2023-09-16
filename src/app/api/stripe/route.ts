@@ -5,7 +5,9 @@ import { ProductWithQuantity } from "@/context/StateContext";
 export async function POST(req: NextRequest) {
 	const body = await req.json();
 
-	const stripe = new Stripe(process.env.NEXT_STRIPE_SECRET_KEY);
+	const stripe = new Stripe(process.env.NEXT_STRIPE_SECRET_KEY!, {
+		apiVersion: "2023-08-16",
+	});
 
 	try {
 		// Create Checkout Sessions from body params.
