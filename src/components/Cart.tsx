@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { StateContext } from "@/context/StateContext";
 import Image from "next/image";
 const Cart = () => {
-	const cartRef = useRef();
+	const cartRef = useRef<HTMLDivElement>(null);
 	const {
 		totalPrice,
 		totalQuantities,

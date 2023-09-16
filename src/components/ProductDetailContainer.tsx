@@ -18,7 +18,9 @@ const ProductDetailContainer = ({ product }: ProductDetailContainerProps) => {
 		useContext(StateContext);
 
 	const handleBuyNow = async () => {
-		onAdd(product, qty);
+		const productWithQuantity = { ...product, quantity: 1 };
+		onAdd(productWithQuantity, qty);
+
 		setShowCart(true);
 	};
 	return (
@@ -83,7 +85,8 @@ const ProductDetailContainer = ({ product }: ProductDetailContainerProps) => {
 						type="button"
 						className="add-to-cart"
 						onClick={() => {
-							onAdd(product, qty);
+							const productWithQuantity = { ...product, quantity: 1 };
+							onAdd(productWithQuantity, qty);
 						}}
 					>
 						Add to cart
