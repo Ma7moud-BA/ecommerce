@@ -4,15 +4,18 @@ import React, { createContext, useState, useEffect, ReactNode } from "react";
 
 import toast from "react-hot-toast";
 
-interface ProductWithQuantity extends Product {
+export interface ProductWithQuantity extends Product {
 	quantity: number;
 }
 type Value = {
 	showCart: boolean;
 	setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
 	cartItems: ProductWithQuantity[];
+	setCartItems: React.Dispatch<React.SetStateAction<ProductWithQuantity[]>>;
 	totalPrice: number;
+	setTotalPrice: React.Dispatch<React.SetStateAction<number>>;
 	totalQuantities: number;
+	setTotalQuantities: React.Dispatch<React.SetStateAction<number>>;
 	qty: number;
 	incQty: () => void;
 	decQty: () => void;
@@ -109,8 +112,12 @@ const StateProvider = ({ children }: { children: ReactNode }) => {
 				showCart: showCart,
 				setShowCart: setShowCart,
 				cartItems: cartItems,
+				setCartItems: setCartItems,
+
 				totalPrice: totalPrice,
+				setTotalPrice: setTotalPrice,
 				totalQuantities: totalQuantities,
+				setTotalQuantities: setTotalQuantities,
 				qty: qty,
 				incQty: incQty,
 				decQty: decQty,

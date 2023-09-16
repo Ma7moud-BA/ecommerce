@@ -1,5 +1,5 @@
 "use client";
-import { StateContext } from "@/context/StateContext";
+import { ProductWithQuantity, StateContext } from "@/context/StateContext";
 import { Product } from "@/types/Product";
 import Image from "next/image";
 import React, { useContext, useState } from "react";
@@ -10,21 +10,27 @@ import {
 	AiOutlineStar,
 } from "react-icons/ai";
 type ProductDetailContainerProps = {
-	product: Product;
+	product: ProductWithQuantity;
 };
 const ProductDetailContainer = ({ product }: ProductDetailContainerProps) => {
 	const [index, setIndex] = useState<number>(0);
+	console.log(process.env.NEXT_STRIPE_PUBLISHABLE_KEY);
+	const { incQty, decQty, qty, onAdd, cartItems, setShowCart } =
+		useContext(StateContext);
 
-	const { incQty, decQty, qty, onAdd, cartItems } = useContext(StateContext);
+	const handleBuyNow = async () => {
+		onAdd(product, qty);
+		setShowCart(true);
+	};
 	return (
 		<div className="product-detail-container">
 			<div>
 				<div>
 					<Image
-						src={product.image[index]}
+						src={product?.image[index]}
 						width={500}
 						height={500}
-						alt={product.name}
+						alt={product?.name}
 						className="product-detail-image"
 					></Image>
 				</div>
@@ -83,7 +89,7 @@ const ProductDetailContainer = ({ product }: ProductDetailContainerProps) => {
 					>
 						Add to cart
 					</button>
-					<button type="button" className="buy-now">
+					<button type="button" onClick={handleBuyNow} className="buy-now">
 						Buy now
 					</button>
 				</div>

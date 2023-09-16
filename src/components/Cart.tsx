@@ -6,6 +6,7 @@ import {
 	AiOutlineLeft,
 	AiOutlineShopping,
 } from "react-icons/ai";
+import getStripe from "../helpers/getStripe";
 import { TiDeleteOutline } from "react-icons/ti";
 import toast from "react-hot-toast";
 import { StateContext } from "@/context/StateContext";
@@ -20,6 +21,25 @@ const Cart = () => {
 		toggleCartItemQuantity,
 		onRemove,
 	} = useContext(StateContext);
+	const handleCheckout = async () => {
+		const stripe = await getStripe();
+		try {
+			const res = await fetch("/api/stripe", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(cartItems),
+			});
+			const data = await res.json();
+
+			toast.loading("Redirecting...");
+			console.log(data);
+			stripe.redirectToCheckout({ sessionId: data.id });
+		} catch (error: any) {
+			console.error(error.message);
+		}
+	};
 
 	return (
 		<div className="cart-wrapper" ref={cartRef}>
@@ -50,7 +70,7 @@ const Cart = () => {
 						{cartItems.map((item) => (
 							<div key={item._id} className="product">
 								<Image
-									src={item.image[0]}
+									src={item?.image[0]}
 									height={200}
 									width={200}
 									alt={item.name}
@@ -100,7 +120,10 @@ const Cart = () => {
 								<h3>${totalPrice}</h3>
 							</div>
 							<div className="btn-container">
-								<button className="btn"> pat with stripe</button>
+								<button className="btn" onClick={handleCheckout}>
+									{" "}
+									pay with stripe
+								</button>
 							</div>
 						</div>
 					</div>

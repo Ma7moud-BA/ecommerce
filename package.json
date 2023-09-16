@@ -28,7 +28,11 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
     "sanity": "^3.16.4",
+    "stripe": "^13.6.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.6.1"
   }
 }
