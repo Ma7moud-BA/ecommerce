@@ -14,7 +14,6 @@ type ProductDetailContainerProps = {
 };
 const ProductDetailContainer = ({ product }: ProductDetailContainerProps) => {
 	const [index, setIndex] = useState<number>(0);
-	console.log(process.env.NEXT_STRIPE_PUBLISHABLE_KEY);
 	const { incQty, decQty, qty, onAdd, cartItems, setShowCart } =
 		useContext(StateContext);
 

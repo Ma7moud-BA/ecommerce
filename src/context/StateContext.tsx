@@ -34,6 +34,28 @@ const StateProvider = ({ children }: { children: ReactNode }) => {
 	const [totalQuantities, setTotalQuantities] = useState<number>(0);
 	const [qty, setQty] = useState<number>(1);
 
+	useEffect(() => {
+		const cartItemsInStorage = localStorage.getItem("cart");
+
+		if (cartItemsInStorage) {
+			const data: ProductWithQuantity[] = JSON.parse(cartItemsInStorage);
+
+			// Calculate the total quantity of items in the cart
+			const totalCartItemsQuantities: number = data.reduce((current, item) => {
+				return current + item.quantity;
+			}, 0);
+			const totalCartItemsPrices: number = data.reduce((current, item) => {
+				return current + item.price * item.quantity;
+			}, 0);
+
+			setTotalQuantities(totalCartItemsQuantities);
+			setTotalPrice(totalCartItemsPrices);
+			setCartItems(data);
+		}
+	}, []);
+	const addItemToLocalStorage = (items: ProductWithQuantity[]) => {
+		localStorage.setItem("cart", JSON.stringify(items));
+	};
 	//increase quantity
 	const incQty = () => {
 		setQty((prev) => prev + 1);
@@ -61,9 +83,11 @@ const StateProvider = ({ children }: { children: ReactNode }) => {
 					};
 			});
 			setCartItems(updatedCartItems);
+			addItemToLocalStorage(updatedCartItems);
 		} else {
 			product.quantity = quantity;
 			setCartItems([...cartItems, { ...product }]);
+			addItemToLocalStorage([...cartItems, { ...product }]);
 		}
 		toast.success(`${qty} ${product.name} added to the cart.`);
 	};
@@ -71,13 +95,6 @@ const StateProvider = ({ children }: { children: ReactNode }) => {
 		id: string,
 		action: "increment" | "decrement"
 	) => {
-		// const foundProduct = cartItems.find((item) => item._id === id);
-
-		// if (!foundProduct) {
-		// 	// Product not found, handle error or return early
-		// 	return;
-		// }
-
 		const updatedCartItems = cartItems.map((item) => {
 			if (item._id === id) {
 				if (action === "increment") {
@@ -96,6 +113,7 @@ const StateProvider = ({ children }: { children: ReactNode }) => {
 
 		// Update the cartItems state with the modified array
 		setCartItems(updatedCartItems);
+		addItemToLocalStorage(updatedCartItems);
 	};
 	const onRemove = (product: ProductWithQuantity) => {
 		const filteredCartItems = cartItems.filter((item) => {
