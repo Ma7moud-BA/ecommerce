@@ -4,6 +4,10 @@
 
 This e-commerce website is built using Next.js, TypeScript, Sanity, Stripe, Tailwind CSS, and several additional libraries. It allows users to browse products, add them to the cart, adjust quantities, and complete the checkout process. The project also features three shipping options: free shipping, fast shipping, and teleportation (for fun). To test the checkout process, you can use the test card information: 4242 4242 4242 4242.
 
+## Live Website Preview
+
+Check out the live website preview [here](https://ecommerce-fawn-one.vercel.app/).
+
 ## Key Libraries Used
 
 #### 1. Next.js
