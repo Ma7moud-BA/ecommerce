@@ -12,7 +12,7 @@ import {
 type ProductDetailContainerProps = {
 	product: ProductWithQuantity;
 };
-const ProductDetailContainer = ({ product }: ProductDetailContainerProps) => {
+const ProductDetailContainer = ({ product }: Product) => {
 	const [index, setIndex] = useState<number>(0);
 	const { incQty, decQty, qty, onAdd, cartItems, setShowCart } =
 		useContext(StateContext);
