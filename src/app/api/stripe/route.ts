@@ -38,8 +38,8 @@ export async function POST(req: NextRequest) {
 					quantity: item.quantity, // Add quantity here
 				};
 			}),
-			success_url: `${process.env.DEV_DOMAIN}/success`,
-			cancel_url: `${process.env.DEV_DOMAIN}`,
+			success_url: `${process.env.PRODUCTION_DOMAIN}/success`,
+			cancel_url: `${process.env.PRODUCTION_DOMAIN}`,
 		};
 		const session = await stripe.checkout.sessions.create(params);
 		return NextResponse.json(session); // Return an object with the URL
