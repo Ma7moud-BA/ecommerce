@@ -4,7 +4,7 @@ import schemas from "./sanity/schemas";
 // const projectId: string = process.env.SANITY_PROJECT_ID!;
 
 export default defineConfig({
-	projectId: process.env.SANITY_PROJECT_ID,
+	projectId: "he3p524t",
 	dataset: "production",
 	title: "Ecommerce",
 	basePath: "/admin",
