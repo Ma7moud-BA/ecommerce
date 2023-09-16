@@ -10,9 +10,9 @@ import {
 	AiOutlineStar,
 } from "react-icons/ai";
 type ProductDetailContainerProps = {
-	product: ProductWithQuantity;
+	product: Product;
 };
-const ProductDetailContainer = ({ product }: Product) => {
+const ProductDetailContainer = ({ product }: ProductDetailContainerProps) => {
 	const [index, setIndex] = useState<number>(0);
 	const { incQty, decQty, qty, onAdd, cartItems, setShowCart } =
 		useContext(StateContext);
